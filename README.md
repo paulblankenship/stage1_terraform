@@ -1,2 +1,13 @@
 # stage1_terraform
-Stage one of initial implementation of Terraform (No modules yet)
+
+When building out a new or migrating an existing environment using Terraform, it's difficult to know initially what path to take on what a module should look like, where it should go or even how to maintain it initially.  As technologists we simpnly do not know what it should look like when the environment as a whole has been created and how to best leverage modules and parameterization.  So during the initial stage we don't want to hard code, but we do want to at least parameterize what we can to make our code flexible and that is what this repo is to help set an example of how to leverage tfvars, overrides, secrets and a simple wrapper script to help manage it all.  This is AWS based, but there's little reason for me to believe it can't be leveraged in GCP, Azure, ESXi or other TF supported platforms.
+
+Broken down by accounts and environments.  Account is for 'shared' resources that will be used across multiple environments and environments are where the various resources.  E.g. EC2 instances, EKS, etc. live.  Each should be parameterized to allow for better code portability.
+
+NOTE:  There is an additional directory in the account path specifically for account level users and user policies.  This was done so that they could be managed but wouldn't be attempted to config in each region.
+
+To apply the terraform code to a different environment one just needs to create a directory for the region (e.g. us-east-2) and add the necessary variable overrides.tfvars for that region and a secrets.tfvars so no credentials, keys, etc. get checked into source control.  Due to Terraform not interpolating variables early enough to use for the state file, we also need to add in an HCL file.  Currently s3_config.hcl is the standard.  This does mean that each time terraform needs to be run, the .terraform/ directory should be removed and an init shold be performed to look at the correct state files.  This should get scripted at some point so that states don't get copied to the incorrect locations.
+
+There's a script in the root of this repo called `tf_wrapper.py`.  It is written in python3 compliant so you will need to have python3.6 installed in your path. It is not fully featured but it will simplify working with Terraform and the way we currently have the configs laid out.  Specifically it reconfigures the main repo for the config each time so that the source state must be pulled from S3.  For best results, create a symlink to it in a directoy in your $PATH.  If this is on a shared system it may be fine to place it in /usr/local/bin, otherwise it might make more sense for a $HOME/bin added to your $PATH.
+
+This structure, for now, should be followed for any new accounts, environments or application stacks that we setup, as well.  Over a few iterations we will be able to find out how to best modularize the code over all.
