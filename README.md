@@ -12,13 +12,13 @@ Later stages will introduce higher code quality standards, introduce modularizat
 
 ## Specifics
 
-These configs are broken down into 2 paths.  The first are account level configurations.  These are mainly to build out the account and the VPC(s) we may wish to have and then the other is the underlying environments and work loads that will be doing the actual work we're wanting to perform or services we would provide.  These will pull outputs from the above account level infrastructure.
+These configs are broken down into 2 paths.  The first is for account level configurations.  These are mainly to build out the account and create the VPC(s) we may wish to have.  The other directory is the underlying environments and work loads that will be doing the actual work we're wanting to perform or services we would provide.  These will pull outputs from the above account level infrastructure.
 
 ### Account level
 
 Inside this directory you'll see there's 2 additional directories.  One for Shared infra services and then one for dev.  Over time there would likely be more depending on how your environment is built out.  I would suspect that at least a production would be added.
 
-These configurations are the 'parent' of anything else we need to do and as such need to be applied first.  Downstream will be using various outputs provided here.
+These configurations are the 'parent' of anything else we build and as such needs to be applied first.  Downstream will be using various outputs that are provided here.
 
 ### Environment level
 
