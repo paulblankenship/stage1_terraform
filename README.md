@@ -6,7 +6,7 @@ When building out a new or migrating an existing environment using Terraform, it
 
 What this stage is doing for us is providing the same code to use everywhere that each resource has a count parameter that we can set to 0 if that env does not actually need those particular resources, or in other ways manage what we need and where.
 
-Later stages will introduce higher code quality standards, introduce modularization and will ultimately go all the way to full blown CI/CD when we know what are mature code base looks like.  Again, this is the stage where we are purely learning what that will look like for our specific organization.
+Later stages will introduce higher code quality standards, introduce modularization and will ultimately go all the way to full blown CI/CD when we know what our mature code base looks like.  Again, this is the stage where we are purely learning what that will look like for our specific organization.
 
 **NOTE:** This repo will may or may not have working Terraform configurations.  This repo is about showing early stage Terraform code structure and as such there was a lot of copy/paste to create it and while find and replace is handy, sometimes things get missed and the configs have not been tested to actually work, however the layout and the script does do exactly as described.
 
